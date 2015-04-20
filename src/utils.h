@@ -26,7 +26,7 @@ along with Nome-Programma.  If not, see <http://www.gnu.org/licenses/>
 
 #include "qtimports.h"
 #include "structs.h"
-#include "notification.h"
+//#include "notification.h"
 
 class Utils
 {

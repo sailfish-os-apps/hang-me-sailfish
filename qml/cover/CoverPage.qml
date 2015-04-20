@@ -81,7 +81,7 @@ CoverBackground {
 
         Image {
                         id: coverIcon
-                        source: "qrc:///icons/Hangish.png"
+                        source: "qrc:///hang-me.png"
                         fillMode: Image.PreserveAspectFit
                         cache: true
                         anchors.horizontalCenter: parent.horizontalCenter

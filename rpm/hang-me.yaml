@@ -1,4 +1,4 @@
-Name: Hangish
+Name: hang-me
 Summary: Jolla Google Hangouts Client
 Version: 0.3
 Release: 0
@@ -6,7 +6,7 @@ Release: 0
 # http://gitorious.org/meego-developer-tools/spectacle/blobs/master/data/GROUPS
 Group: Qt/Qt
 URL: http://example.org/
-License: GPL3
+License: LGPLv2
 # This must be generated before uploading a package to a remote build service.
 # Usually this line does not need to be modified.
 Sources:

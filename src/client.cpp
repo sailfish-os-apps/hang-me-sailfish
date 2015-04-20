@@ -978,7 +978,6 @@ void Client::setActiveClientReply()
     }
     else {
         //I've just set this; I can assume I am the active client
-        notifier->activeClientUpdate(IS_ACTIVE_CLIENT);
     }
 }
 
@@ -1169,11 +1168,7 @@ void Client::initDone()
     QObject::connect(channel, SIGNAL(cookieUpdateNeeded(QNetworkCookie)), this, SLOT(cookieUpdateSlot(QNetworkCookie)));
     QObject::connect(channel, SIGNAL(qnamUpdated(QNetworkAccessManager*)), this, SLOT(qnamUpdatedSlot(QNetworkAccessManager*)));
 
-    notifier = new Notifier(this, contactsModel);
-    QObject::connect(this, SIGNAL(showNotification(QString,QString,QString,QString)), notifier, SLOT(showNotification(QString,QString,QString,QString)));
-    QObject::connect(channel, SIGNAL(showNotification(QString,QString,QString,QString)), notifier, SLOT(showNotification(QString,QString,QString,QString)));
     QObject::connect(channel, SIGNAL(showNotification(QString,QString,QString,QString)), this, SLOT(catchNotificationForCover(QString,QString,QString,QString)));
-    QObject::connect(channel, SIGNAL(activeClientUpdate(int)), notifier, SLOT(activeClientUpdate(int)));
 
     channel->listen();
     initCompleted = true;
@@ -1306,7 +1301,6 @@ void Client::setAppOpened()
     if (convId!="")
         updateWatermark(convId);
 
-    notifier->closeAllNotifications();
     emit deletedNotifications();
 
     setActiveClient();

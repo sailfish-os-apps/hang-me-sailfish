@@ -25,7 +25,7 @@ along with Nome-Programma.  If not, see <http://www.gnu.org/licenses/>
 #define CHANNEL_H
 
 #include "utils.h"
-#include "notification.h"
+//#include "notification.h"
 #include "conversationmodel.h"
 #include "rostermodel.h"
 

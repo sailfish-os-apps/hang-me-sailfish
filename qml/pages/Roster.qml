@@ -1,35 +1,10 @@
-/*
-
-Hanghish
-Copyright (C) 2015 Daniele Rogora
-
-This file is part of Hangish.
-
-Hangish is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-Hangish is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with Nome-Programma.  If not, see <http://www.gnu.org/licenses/>
-
-*/
-
-
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-
 import "../delegates"
 
 Page {
-    id: page
-    objectName: "roster"
-
+    id: page;
+    objectName: "roster";
     onStatusChanged: {
         console.log(page.status)
         if (page.status==2) {
@@ -37,36 +12,89 @@ Page {
             console.log("Resetting conv")
             conversationModel.cid = ""
         }
-     }
+    }
 
     SilicaListView {
-        id: listView
-        model: rosterModel
-        anchors.fill: parent
+        id: listView;
+        model: rosterModel;
+        anchors.fill: parent;
         header: PageHeader {
-            title: qsTr("Conversations")
+            title: qsTr ("Conversations");
         }
-        delegate: RosterDelegate {
+        delegate: BackgroundItem {
+            id: delegate;
+            height: img.height;
+            anchors {
+                left: parent.left;
+                right: parent.right;
+            }
             onClicked: {
                 //var convPage = Qt.createComponent("Conversation.qml");
                 console.log("Clicked " + id)
                 conversation.loadConversationModel(id);
                 rosterModel.readConv = id;
                 conversation.conversationName = name;
-                pageStack.push(conversation);
+                pageStack.push (conversation);
+            }
+
+            Image {
+                id: img;
+                source: model.imagePath;
+                width: Theme.iconSizeLarge;
+                height: width;
+                asynchronous: true;
+                anchors {
+                    left: parent.left;
+                    verticalCenter: parent.verticalCenter;
+                }
+            }
+            Label {
+                text: (model.unread ? model.name + " " + model.unread : model.name);
+                color: (delegate.highlighted ? Theme.highlightColor : Theme.primaryColor);
+                elide: Text.ElideRight;
+                font.bold: model.unread;
+                anchors {
+                    left: img.right;
+                    right: bubble.left;
+                    margins: Theme.paddingMedium;
+                    verticalCenter: parent.verticalCenter;
+                }
+            }
+            Rectangle {
+                id: bubble;
+                color: Qt.rgba (1,1,1,0.15);
+                width: Theme.itemSizeExtraSmall;
+                height: width;
+                radius: (width / 2);
+                visible: model.unread;
+                antialiasing: true;
+                border {
+                    width: 1;
+                    color: Theme.highlightColor;
+                }
+                anchors {
+                    right: parent.right;
+                    margins: Theme.paddingMedium;
+                    verticalCenter: parent.verticalCenter;
+                }
+
+                Label {
+                    text: model.unread;
+                    color: Theme.primaryColor;
+                    anchors.centerIn: parent;
+                }
             }
         }
-        VerticalScrollDecorator {}
+        VerticalScrollDecorator { }
     }
     Connections {
-            target: listView.model
-            onDataChanged: {
-                //console.log("Changing data")
-            }
+        target: rosterModel;
+        onDataChanged: {
+            //console.log("Changing data")
         }
-
+    }
     Connections {
-        target: Qt.application
+        target: Qt.application;
         onActiveChanged: {
             if(!Qt.application.active) {
                 // Pauze the game here
@@ -83,10 +111,4 @@ Page {
             }
         }
     }
-
 }
-
-
-
-
-

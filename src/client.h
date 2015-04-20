@@ -33,7 +33,6 @@ along with Nome-Programma.  If not, see <http://www.gnu.org/licenses/>
 #include "contactsmodel.h"
 #include <QCryptographicHash>
 #include "utils.h"
-#include "notifier.h"
 
 
 class Client : public QObject
@@ -51,7 +50,6 @@ class Client : public QObject
     QNetworkCookie pvt;
 
 private:
-    Notifier *notifier;
     bool needLogin;
     bool needSync;
     QDateTime needSyncTS;

@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/hang-me.qml</file>
+        <file>qml/cover/CoverPage.qml</file>
+        <file>qml/delegates/Message.qml</file>
+        <file>qml/pages/Conversation.qml</file>
+        <file>qml/pages/FirstPage.qml</file>
+        <file>qml/pages/FullscreenImage.qml</file>
+        <file>qml/pages/ImagePicker.qml</file>
+        <file>qml/pages/InfoBanner.qml</file>
+        <file>qml/pages/Roster.qml</file>
+        <file>hang-me.png</file>
+    </qresource>
+</RCC>
