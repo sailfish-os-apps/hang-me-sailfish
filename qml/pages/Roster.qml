@@ -49,7 +49,7 @@ Page {
                 }
             }
             Label {
-                text: (model.unread ? model.name + " " + model.unread : model.name);
+                text: model.name;
                 color: (delegate.highlighted ? Theme.highlightColor : Theme.primaryColor);
                 elide: Text.ElideRight;
                 font.bold: model.unread;
